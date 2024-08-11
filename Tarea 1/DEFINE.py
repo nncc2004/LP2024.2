@@ -3,10 +3,8 @@ from diccs import dicc_variables
 
 #Declaracion funcion DEFINE
 #Agrega una variable nueva a un diccionario. Si ya existe -> error 'Variable ya definda'
-patron = r"\$_(.+)"
-
 def DEFINE(variable, i):
-    variable = re.search(patron, variable)
+    variable = re.search(r"\$_(.+)", variable)
     variable = variable.group(1)
 
     if variable not in dicc_variables:

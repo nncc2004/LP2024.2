@@ -5,10 +5,9 @@ arch = open('archivo.txt', 'r')
 i = 0
 
 REGEX_DEFINE = r"^(DEFINE)\s\$_[A-Z](\S+)$"
-REGEX_DP = r"^(DP)\s(.+)$" #Puede hacerse mejor. Hay dos patrones y se pueden poner ambos con el 'or'
+REGEX_DP = r"^(DP)\s(.+)$"
 REGEX_MOSTRAR = r""#Pendiente
 REGEX_IF = r"" #Pendiente
-
 
 
 for linea in arch:
@@ -41,4 +40,5 @@ for linea in arch:
 print('',end='\n\n')
 print('Variables almacenadas:')
 for llave in dicc_variables:
-    print(llave)
+    valor = str(llave)+": "+str(dicc_variables[llave])
+    print(valor)
