@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+
+#Propios
+__pycache__/
