@@ -1,6 +1,0 @@
-DEFINE $_Var_1
-DEFINE $_Var_2
-DEFINE $_Atento
-DP $_Var_1 ASIG True
-DP $_Var_2 ASIG False
-DP $_Atento == #23# #23#

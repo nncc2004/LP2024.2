@@ -98,6 +98,8 @@ for linea in arch:
                 else:
                     print("Comando desconocido o error sintactico en linea "+str(i)+": "+linea)
                     break       
+        elif MATCH_MOSTRAR:
+            print("PANICO AAAAA")
         else:
             print("Syntax error en linea "+str(i)+": "+linea)
             break
@@ -110,8 +112,6 @@ for linea in arch:
     
 
 '''
-elif MATCH_MOSTRAR:
-pass
 elif MATCH_IF:
 pass
 
