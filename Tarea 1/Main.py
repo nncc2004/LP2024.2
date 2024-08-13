@@ -1,13 +1,16 @@
 import re
 import DEFINE as D
 import DP
+import MOSTRAR as M
 from diccs import dicc_variables
+
 arch = open('archivo.txt', 'r')
+output = open('output.txt', 'w')
 i = 0
 respuesta = 1
 REGEX_DEFINE = r"^(DEFINE)\s(\S+)$"
 REGEX_DP = r"^(DP)\s(.+)$"
-REGEX_MOSTRAR = r""#Pendiente
+REGEX_MOSTRAR = r"^(MOSTRAR\()(\S)+(\))$"
 REGEX_IF = r"" #Pendiente
 
 
@@ -39,7 +42,7 @@ for linea in arch:
                     if len(palabras) != 5: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
-                    respuesta == DP.SUM(i, ContieneString, palabras)
+                    respuesta = DP.SUM(i, ContieneString, palabras)
                 elif comando == '*': #Multiplicacion
                     if len(palabras) != 5: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
@@ -98,8 +101,11 @@ for linea in arch:
                 else:
                     print("Comando desconocido o error sintactico en linea "+str(i)+": "+linea)
                     break       
-        elif MATCH_MOSTRAR:
-            print("PANICO AAAAA")
+        elif MATCH_MOSTRAR: #MOSTRAR
+            if ContieneString:
+                print("Syntax error en linea "+str(i)+": "+linea+". Mostrar debe contener una variable, no un string")
+                break
+            respuesta = M.MOSTRAR(linea, i, output)
         else:
             print("Syntax error en linea "+str(i)+": "+linea)
             break

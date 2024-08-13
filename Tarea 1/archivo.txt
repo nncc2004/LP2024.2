@@ -8,3 +8,4 @@ DP $_Area * $_Largo $_Ancho
 DP $_Texto ASIG #La altura del rectangulo es #
 DP $_Texto + $_Texto $_Area
 MOSTRAR($_Texto)
+MOSTRAR(chao)
