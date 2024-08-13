@@ -1,9 +1,6 @@
-DEFINE $_Largo
-DEFINE $_Ancho
-DEFINE $_Area
-DEFINE $_Texto
-DP $_Largo ASIG 6
-DP $_Ancho ASIG 5
-DP $_Area * $_Largo $_Ancho
-DP $_Texto ASIG #La altura del rectangulo es #
-DP $_Texto + $_Texto $_Area
+DEFINE $_Var_1
+DEFINE $_Var_2
+DEFINE $_Atento
+DP $_Var_1 ASIG True
+DP $_Var_2 ASIG False
+DP $_Atento == #23# #23#

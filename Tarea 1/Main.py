@@ -28,22 +28,33 @@ for linea in arch:
             respuesta = D.DEFINE(linea, i)
         elif MATCH_DP: #DP
             palabras = re.findall(r"[^\s]+", linea)
+            comando = palabras[2]
             if not ContieneString:
-                if palabras[2] == 'ASIG': #Asignacion
+                if comando == 'ASIG': #Asignacion
                     if len(palabras) != 4: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
                     respuesta = DP.ASIG(i, ContieneString, palabras)
-                elif palabras[2] == '+': #Suma
+                elif comando == '+': #Suma
                     if len(palabras) != 5: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
                     respuesta == DP.SUM(i, ContieneString, palabras)
-                elif palabras[2] == '*': #Multiplicacion
+                elif comando == '*': #Multiplicacion
                     if len(palabras) != 5: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
-                    respuesta == DP.MULT(linea, i, palabras)
+                    respuesta == DP.MULT(i, palabras)
+                elif comando == '>': #Mayor que (Greater)
+                    if len(palabras) != 5: 
+                        print("Error sintactico en linea "+str(i)+": "+linea)
+                        break
+                    respuesta == DP.GREATER(i, palabras)
+                elif comando == '==': #IGUAL
+                    if len(palabras) != 5: 
+                        print("Error sintactico en linea "+str(i)+": "+linea)
+                        break
+                    respuesta == DP.IGUAL(i, ContieneString, palabras)
                 else:
                     print("Comando desconocido o error sintactico en linea "+str(i)+": "+linea)
                     break
@@ -51,12 +62,12 @@ for linea in arch:
                 palabras_SinString = re.findall(r"[^\s]+", Linea_SinString)
                 Strings = re.findall((r"#(.*?)#"), linea)
 
-                if palabras[2] == 'ASIG': #Asignacion
+                if comando == 'ASIG': #Asignacion
                     if len(palabras_SinString) != 3 or len(Strings) != 1:
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
                     respuesta = DP.ASIG(i, ContieneString, palabras_SinString, Strings)
-                elif palabras[2] == '+':#Suma
+                elif comando == '+':#Suma
                     if len(Strings) == 1 and len(palabras_SinString) != 4: 
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
@@ -67,13 +78,26 @@ for linea in arch:
                         print("Error sintactico en linea "+str(i)+": "+linea)
                         break
                     respuesta = DP.SUM(i, ContieneString, palabras_SinString, Strings)
-                elif palabras[2] == '*': #Multiplicacion
+                elif comando == '*': #Multiplicacion
                     print("La multiplicacion no permite tipo string. Revisar la linea " +str(i))
                     break
+                elif comando == '>': #Mayor que (Greater)
+                    print("La operacion 'mayor que' no permite tipo string. Revisar la linea " +str(i))
+                    break
+                elif comando == '==': #IGUAL
+                    if len(Strings) == 1 and len(palabras_SinString) != 4: 
+                        print("Error sintactico en linea "+str(i)+": "+linea)
+                        break
+                    elif len(Strings) == 2 and len(palabras_SinString) != 3:
+                        print("Error sintactico en linea "+str(i)+": "+linea)
+                        break
+                    elif len(Strings) > 2:
+                        print("Error sintactico en linea "+str(i)+": "+linea)
+                        break
+                    respuesta = DP.IGUAL(i, ContieneString, palabras_SinString, Strings)
                 else:
                     print("Comando desconocido o error sintactico en linea "+str(i)+": "+linea)
-                    break
-       
+                    break       
         else:
             print("Syntax error en linea "+str(i)+": "+linea)
             break
@@ -92,7 +116,6 @@ elif MATCH_IF:
 pass
 
 ''' 
-
 
 
 print('',end='\n\n')
