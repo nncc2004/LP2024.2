@@ -1,11 +1,12 @@
-DEFINE $_Largo
-DEFINE $_Ancho
-DEFINE $_Area
-DEFINE $_Texto
-DP $_Largo ASIG 6
-DP $_Ancho ASIG 5
-DP $_Area * $_Largo $_Ancho
-DP $_Texto ASIG #La altura del rectangulo es #
-DP $_Texto + $_Texto $_Area
-MOSTRAR($_Texto)
-MOSTRAR(chao)
+DEFINE $_Var1
+DEFINE $_Var2
+DEFINE $_Var3
+DP $_Var1 ASIG True
+IF($_Var1){
+    DP $_Var2 ASIG 10
+    MOSTRAR($_Var2)
+} ELSE {
+    DP $_Var3 ASIG 15
+    MOSTRAR($_Var3  )
+}
+DEFINE $_Var4

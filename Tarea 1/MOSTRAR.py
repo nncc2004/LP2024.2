@@ -4,11 +4,12 @@ import diccs
 
 def MOSTRAR(linea, i, output):
 
-    Verificar_formato = r"^(MOSTRAR\()(\$_(\S)+)(\))$"
+    Verificar_formato = r"^(MOSTRAR\((\s*))(\S)+((\s*)\))$"
 
     if re.match(Verificar_formato, linea):
-        variable = re.search(r"(\()(\S+)(\))", linea).group(2)
-        nombre_variable = re.search(r"(\()(\$_)(\S+)(\))", linea).group(3)
+        print('', end='\n\n')
+        variable = re.search(r"(\((\s*))(\S+)((\s*)\))", linea).group(3)
+        nombre_variable = re.search(r"(\((\s*))(\$_)(\S+)((\s*)\))", linea).group(4)
         if not diccs.verificar_existencia(nombre_variable) or diccs.dicc_variables[nombre_variable] == None:
                 print("Variable No Definida: La variable de nombre '" +variable+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
                 return 0

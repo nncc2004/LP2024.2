@@ -15,7 +15,7 @@ def ASIG(i, ContieneString, palabras, Strings = 0):
             pass
 
         if palabras[3] == 'True' or palabras[3] == 'False':
-            valor = bool(palabras[3])
+            valor = True if palabras[3] == 'True' else False
         
         variable_entera_origen = re.search(r"\$_(.+)", palabras[3])
         if variable_entera_origen:
