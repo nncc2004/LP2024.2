@@ -1,12 +1,27 @@
-DEFINE $_Var1
+DEFINE    $_Var1
 DEFINE $_Var2
 DEFINE $_Var3
-DP $_Var1 ASIG True
+DP $_Var1 ASIG False
+DP $_Var2 ASIG True
 IF($_Var1){
-    DP $_Var2 ASIG 10
-    MOSTRAR($_Var2)
+    DP $_Var3 ASIG #prueba 1#
+    MOSTRAR($_Var3)
+    IF($_Var2){
+        DP $_Var3 ASIG #prueba 2#
+        MOSTRAR($_Var3)
+    } ELSE {
+        DP $_Var3 ASIG #prueba 3#
+        MOSTRAR($_Var3)
+    }
 } ELSE {
-    DP $_Var3 ASIG 15
-    MOSTRAR($_Var3  )
+    IF($_Var2){
+        DP $_Var3 ASIG #prueba 4#
+        MOSTRAR($_Var3)
+    } ELSE {
+        DP $_Var3 ASIG #prueba 5#
+        MOSTRAR($_Var3)
+    }
+    DP $_Var3 ASIG #prueba 6#
+    MOSTRAR($_Var3)
 }
-DEFINE $_Var4
+DP $_Var3 + #$_Var1# #$_Var2#

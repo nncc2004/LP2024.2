@@ -1,7 +1,7 @@
 import re
 import diccs
 
-def condicional(linea, i, condicion_OK):
+def condicional(linea, i, condicion_OK, nivel):
     variable_entera = re.search(r"IF\s*\(\s*(\$_\w+)\s*\)", linea)
 
     if variable_entera:
@@ -22,9 +22,9 @@ def condicional(linea, i, condicion_OK):
 
 
     if diccs.dicc_variables[variable]:
-        condicion_OK[0] = True
+        condicion_OK[nivel] = True
     else:
-        condicion_OK[0] = False
+        condicion_OK[nivel] = False
 
     return 1
 
