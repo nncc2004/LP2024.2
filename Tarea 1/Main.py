@@ -12,10 +12,9 @@ i = 0
 REGEX_DEFINE = r"^(DEFINE)\s+(\S+)$"
 REGEX_DP = r"^(DP)\s(.+)$"
 REGEX_MOSTRAR = r"^(MOSTRAR\((\s*))(\S)+((\s*)\))$"
-REGEX_IF = r"^(IF\(\s*\S+\s*\)\s*\{$)" 
-REGEX_ELSE = r"(\}\s*ELSE\s*\{$)"
+REGEX_IF = r"^(if\(\s*\S+\s*\)\s*\{$)" 
+REGEX_ELSE = r"(\}\s*else\s*\{$)"
 
-numero_anidacion = 0
 condicion_OK = [True]
 
 for linea in arch:
@@ -28,7 +27,6 @@ for linea in arch:
         respuesta = S.separador(linea, i, REGEX_DEFINE, REGEX_DP, REGEX_MOSTRAR, arch, output)
     
     if MATCH_IF:
-        numero_anidacion+=1
         respuesta = IF_ELSE.condicional(linea, i, condicion_OK)
 
     
@@ -38,15 +36,13 @@ for linea in arch:
         else:
             condicion_OK[0] = False
 
-        numero_anidacion -= 1
     if MATCH_CORCHETE:
         condicion_OK = [True]
 
     if not respuesta: 
         break
     
-if numero_anidacion != 0:
-    print("No se cerro el condicional de manera apropiada, por favor revisar el codigo. " + str(numero_anidacion))
+
     
 print('',end='\n\n')
 print('Variables almacenadas:')

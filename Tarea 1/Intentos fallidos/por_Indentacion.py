@@ -1,7 +1,7 @@
 import re
 from diccs import dicc_variables   
 import separador as S
-import IF_ELSE
+import IF_ELSE_2 as IF_ELSE
 
 arch = open('archivo.txt', 'r')
 output = open('output.txt', 'w')

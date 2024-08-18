@@ -11,9 +11,9 @@ def DEFINE(variable, i):
         if variable not in diccs.dicc_variables:
             diccs.dicc_variables[variable] = None
         else:
-            print("Error en linea "+str(i)+": Variable ya definida")
+            print("Error: Variable ya definida. Revisar la linea "+str(i) )
             return 0
     else:
-        print("Error durante ejecucion: Mala Sintaxis de variable en DEFINE en la linea "+str(i))
+        print("Error: Variable mal definida en la linea "+str(i))
         return 0
     return 1

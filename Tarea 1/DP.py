@@ -21,24 +21,24 @@ def ASIG(i, ContieneString, palabras, Strings = 0):
         if variable_entera_origen:
             variable_origen = variable_entera_origen.group(1)
             if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                 return 0
             valor = diccs.dicc_variables[variable_origen]
             
         
         if valor == '':
-            print("Los strings deben ir entre '#'. Error sintactico en la linea " +str(i))
+            print("Error: Los strings deben ir entre '#'. Revisar la linea " +str(i))
             return 0
 
 
     if variable:
         variable = variable.group(1)
         if not diccs.verificar_existencia(variable):
-            print("Variable No Definida: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+            print("Error: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
             return 0
         diccs.dicc_variables[variable] = valor
     else:
-        print("Variable mal definida en la linea "+str(i))
+        print("Error: Variable mal definida en la linea "+str(i))
         return 0
     
 
@@ -57,14 +57,14 @@ def SUM(i, ContieneString, palabras, Strings = 0):
                 if re.search(r"\$_(.+)", palabras[3]):
                     variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                     if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                        print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                        print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                         return 0
                     valor1 = diccs.dicc_variables[variable_origen]
                 else:
-                    print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                    print("Error: La suma solo permite tipo string y entero. Revisar la linea " +str(i))
                     return 0
             if type(valor1) == bool: 
-                print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                print("Error: La suma solo permite tipo string y entero. Revisar la linea " +str(i))
                 return 0
             valor1 = str(valor1)
             valor2 = Strings[0]                
@@ -79,11 +79,11 @@ def SUM(i, ContieneString, palabras, Strings = 0):
             if re.search(r"\$_(.+)", palabras[3]):
                     variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                     if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                        print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                        print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                         return 0
                     valor1 = diccs.dicc_variables[variable_origen]
             else:
-                print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                print("Error: La suma solo permite tipo string y entero. Revisar la linea " +str(i))
                 return 0
         #valor 2
         try:
@@ -92,16 +92,16 @@ def SUM(i, ContieneString, palabras, Strings = 0):
             if re.search(r"\$_(.+)", palabras[4]):
                 variable_origen = re.search(r"\$_(.+)", palabras[4]).group(1)
                 if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                        print("Variable No Definida: La variable de nombre '" +palabras[4]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                        print("Error: La variable de nombre '" + palabras[4]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                         return 0
                 valor2 = diccs.dicc_variables[variable_origen]
             else:
-                print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                print("Error: La suma solo permite tipo string y entero. Revisar la linea " +str(i))
                 return 0
             
         #Verificar que no sea Bool y orden de la suma
         if type(valor1) == bool or type(valor2) == bool: 
-            print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+            print("Error: La suma solo permite tipo string y entero. Revisar la linea " +str(i))
             return 0
         
         if type(valor1) == type(valor2):
@@ -114,12 +114,12 @@ def SUM(i, ContieneString, palabras, Strings = 0):
     if variable:
         variable = variable.group(1)
         if not diccs.verificar_existencia(variable):
-            print("Variable No Definida: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+            print("Error: La variable de nombre '" + variable_entera + "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
             return 0
         diccs.dicc_variables[variable] = suma
         
     else:
-        print("Variable mal definida en la linea "+str(i))
+        print("Error: Variable mal definida en la linea "+str(i))
         return 0
     
     return 1
@@ -137,11 +137,11 @@ def MULT( i, palabras):
         if re.search(r"\$_(.+)", palabras[3]):
                 variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                 if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                    print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                    print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                     return 0
                 valor1 = diccs.dicc_variables[variable_origen]
         else:
-            print("La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
+            print("Error: La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
             return 0
     #valor 2
     try:
@@ -150,16 +150,16 @@ def MULT( i, palabras):
         if re.search(r"\$_(.+)", palabras[4]):
             variable_origen = re.search(r"\$_(.+)", palabras[4]).group(1)
             if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                    print("Variable No Definida: La variable de nombre '" +palabras[4]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                    print("Error: La variable de nombre '" + palabras[4]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                     return 0
             valor2 = diccs.dicc_variables[variable_origen]
         else:
-            print("La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
+            print("Error: La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
             return 0
         
     #Verificar que no sea Bool o string
     if type(valor1) != int or type(valor2) != int: 
-        print("La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
+        print("Error: La multiplicacion solo permite tipo entero. Revisar la linea " +str(i))
         return 0
     
     mult = valor1*valor2
@@ -168,12 +168,12 @@ def MULT( i, palabras):
     if variable:
         variable = variable.group(1)
         if not diccs.verificar_existencia(variable):
-            print("Variable No Definida: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+            print("Error: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
             return 0
 
         diccs.dicc_variables[variable] = mult
     else:
-        print("Variable mal definida en la linea "+str(i))
+        print("Error: variable mal definida en la linea "+str(i))
         return 0
     
 
@@ -192,11 +192,11 @@ def GREATER(i, palabras):
         if re.search(r"\$_(.+)", palabras[3]):
                 variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                 if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                    print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                    print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                     return 0
                 valor1 = diccs.dicc_variables[variable_origen]
         else:
-            print("La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
+            print("Error: La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
             return 0
     #valor 2
     try:
@@ -205,16 +205,16 @@ def GREATER(i, palabras):
         if re.search(r"\$_(.+)", palabras[4]):
             variable_origen = re.search(r"\$_(.+)", palabras[4]).group(1)
             if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                    print("Variable No Definida: La variable de nombre '" +palabras[4]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                    print("Error: La variable de nombre '" + palabras[4]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                     return 0
             valor2 = diccs.dicc_variables[variable_origen]
         else:
-            print("La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
+            print("Error: La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
             return 0
         
     #Verificar que no sea Bool o string
     if type(valor1) != int or type(valor2) != int: 
-        print("La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
+        print("Error: La operacion 'mayor que' solo permite tipo entero. Revisar la linea " +str(i))
         return 0
     
     mayor = True if valor1>valor2 else False
@@ -223,12 +223,13 @@ def GREATER(i, palabras):
     if variable:
         variable = variable.group(1)
         if not diccs.verificar_existencia(variable):
-            print("Variable No Definida: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+            print("Error: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
+            
             return 0
 
         diccs.dicc_variables[variable] = mayor
     else:
-        print("Variable mal definida en la linea "+str(i))
+        print("Error: Variable mal definida en la linea "+str(i))
         return 0
     
 
@@ -251,16 +252,16 @@ def IGUAL(i, ContieneString, palabras, Strings = 0):
                     if re.search(r"\$_(.+)", palabras[3]):
                         variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                         if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                            print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                            print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                             return 0
                         valor1 = diccs.dicc_variables[variable_origen]
                     else:
-                        print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                        print("Error: La suma solo permite valores de tipo string y entero. Revisar la linea " +str(i))
                         return 0
                 if type(valor1) == bool: 
-                    print("La suma solo permite tipo string y entero. Revisar la linea " +str(i))
+                    print("Error: La suma solo permite valores de tipo string y entero. Revisar la linea " +str(i))
                     return 0
-                #valor1 = str(valor1) #Descomentar esto si no se respeta el tipo al comparar (23 = '23')
+ 
                 valor2 = Strings[0]                
                 iguales = True if valor1 == valor2 else False
             else:
@@ -273,11 +274,11 @@ def IGUAL(i, ContieneString, palabras, Strings = 0):
             if re.search(r"\$_(.+)", palabras[3]):
                     variable_origen = re.search(r"\$_(.+)", palabras[3]).group(1)
                     if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                        print("Variable No Definida: La variable de nombre '" +palabras[3]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                        print("Error: La variable de nombre '" + palabras[3]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                         return 0
                     valor1 = diccs.dicc_variables[variable_origen]
             else:
-                print("La comparacion de igualdad solo permite tipo string y entero. Revisar la linea " +str(i))
+                print("Error: La comparacion de igualdad solo permite variables de tipo string y entero. Revisar la linea " +str(i))
                 return 0
         #valor 2
         try:
@@ -286,15 +287,15 @@ def IGUAL(i, ContieneString, palabras, Strings = 0):
             if re.search(r"\$_(.+)", palabras[4]):
                 variable_origen = re.search(r"\$_(.+)", palabras[4]).group(1)
                 if not diccs.verificar_existencia(variable_origen) or diccs.dicc_variables[variable_origen] == None:
-                        print("Variable No Definida: La variable de nombre '" +palabras[4]+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+                        print("Error: La variable de nombre '" + palabras[4]+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
                         return 0
                 valor2 = diccs.dicc_variables[variable_origen]
             else:
-                print("La comparacion de igualdad solo permite tipo string y entero. Revisar la linea " +str(i))
+                print("Error: La comparacion de igualdad solo permite variables de tipo string y entero. Revisar la linea " +str(i))
                 return 0
         #Verificar que no sea Bool y orden de la suma
         if type(valor1) == bool or type(valor2) == bool: 
-            print("La comparacion de igualdad solo permite tipo string y entero. Revisar la linea " +str(i))
+            print("Error: La comparacion de igualdad solo permite variables de tipo string y entero. Revisar la linea " +str(i))
             return 0
         iguales = True if valor1 == valor2 else False
 
@@ -302,9 +303,10 @@ def IGUAL(i, ContieneString, palabras, Strings = 0):
     if variable:
         variable = variable.group(1)
         if not diccs.verificar_existencia(variable):
-            print("Variable No Definida: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor en la linea " +str(i))
+            print("Error: La variable de nombre '" + variable_entera+ "' no ha sido definida o no se le ha asignado valor. Revisar la linea " +str(i))
             return 0
         diccs.dicc_variables[variable] = iguales
     else:
-        print("Variable mal definida en la linea "+str(i))
+        print("Error: Variable mal definida en la linea "+str(i))
         return 0
+    return 1
