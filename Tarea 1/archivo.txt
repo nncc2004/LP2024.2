@@ -2,7 +2,7 @@ DEFINE $_Var1
 DEFINE $_Var2
 DEFINE $_Var3
 DP $_Var3 ASIG 20
-DP $_Var1 == 20 $_Var3
+DP $_Var1 == 200 $_Var3
 if($_Var1){
     DP $_Var3 ASIG #prueba 1#
     MOSTRAR($_Var3)
