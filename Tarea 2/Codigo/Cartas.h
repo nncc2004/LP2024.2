@@ -21,6 +21,9 @@ void * disparoRadar(int x, int y);
 void * disparo500KG(int x, int y);
 
 //Propias
+extern const char *limpiar;
 extern void *** tablero;
 extern int T;
+void * canion_destruido(int x, int y);
+
 #endif

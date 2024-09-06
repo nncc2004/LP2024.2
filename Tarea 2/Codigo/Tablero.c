@@ -14,7 +14,7 @@ void inicializarTablero(int tamano){
         tablero[i] = malloc(tamano * sizeof(void *));
         for(int j = 0; j< tamano; j++){
             tablero[i][j] = malloc(sizeof(casilla));
-            ((casilla * ) tablero[i][j])->simbolo = 'O';
+            ((casilla * ) tablero[i][j])->simbolo = '?';
             ((casilla * ) tablero[i][j])->barco =  0;
         }
     }
@@ -22,17 +22,26 @@ void inicializarTablero(int tamano){
 
 void mostrarTablero(){
     printf("\n    ");
-    for(int i = 0; i <T; i++){printf("%d    ", i);}
+    for(int i = 0; i <T; i++){printf("%d   ", i);}
     printf("\n    ");
-    for(int i = 0; i <T; i++){printf("-    ");}
+    for(int i = 0; i <T; i++){printf("-   ");}
     printf("\n");
     for(int i = 0; i<T; i++){
         printf("%d| ", i);
         for(int j = 0; j<T; j++){
-            printf("(%c", ((casilla * ) tablero[j][i])->simbolo);
-            printf("%d) ", ((casilla * ) tablero[j][i])->barco);
+            if(((casilla * ) tablero[j][i])->simbolo == 'X'){
+                printf("(\033[1;34m%c\033[0m) ", ((casilla * ) tablero[j][i])->simbolo);
+            }else if(((casilla * ) tablero[j][i])->simbolo == 'H'){
+                printf("(\033[1;31m%c\033[0m) ", ((casilla * ) tablero[j][i])->simbolo);
+            }else if(((casilla * ) tablero[j][i])->simbolo == 'B'){
+                printf("(\033[1;32m%c\033[0m) ", ((casilla * ) tablero[j][i])->simbolo);
+            }else{
+                printf("(%c) ", ((casilla * ) tablero[j][i])->simbolo);
+            }
+
+
         }
-        printf("\n");
+        printf("\n\n");
     }
 
 }
@@ -62,7 +71,7 @@ void crearBarco(Barco *bar){
             if(Flag == 1){
                 for(int i = 0; i < bar->largo; i++){
                     ((casilla * ) tablero[X][Y+i])->barco = 1;
-                    ((casilla * ) tablero[X][Y+i])->simbolo = 'B';
+                    //((casilla * ) tablero[X][Y+i])->simbolo = 'B';
                 }
                 
             }
@@ -90,14 +99,10 @@ void crearBarco(Barco *bar){
             if(Flag == 1){
                 for(int i = 0; i < bar->largo; i++){
                     ((casilla * ) tablero[X+i][Y])->barco = 1;
-                    ((casilla * ) tablero[X+i][Y])->simbolo = 'B';
+                    //((casilla * ) tablero[X+i][Y])->simbolo = 'B';
                 }
                 
             }
         }
     }
 }
-
-/*
-
-*/

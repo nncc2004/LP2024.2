@@ -4,28 +4,21 @@
 #include "Cartas.h"
 #include "Tablero.h"
 
+const char *limpiar;
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
     int a;
-    const char *limpiar;
-    printf("Para ejecutar en windows, presione 1. Para Linux presione 2. Para otros, seleccione 0:\n");
-    scanf("%d", &a);
-    switch (a){
-        case 1:
-            limpiar = "cls";
-            break;
-        case 2:
-            limpiar = "clear";
-            break;
-        default:
-            break;
-        }
+    #ifdef _WIN32
+        limpiar = "cls";  // Windows
+    #else
+        limpiar = "clear";  // Unix/Linux/MacOS
+    #endif
     system(limpiar);
     
     
     inicializarMazo();
-    inicializarTablero(6);
+    inicializarTablero(11);
     Barco bar;
     bar.largo = 2;
     bar.particiones_activas = 3;
