@@ -14,7 +14,7 @@ void inicializarTablero(int tamano){
         tablero[i] = malloc(tamano * sizeof(void *));
         for(int j = 0; j< tamano; j++){
             tablero[i][j] = malloc(sizeof(casilla));
-            ((casilla * ) tablero[i][j])->simbolo = 'X';
+            ((casilla * ) tablero[i][j])->simbolo = 'O';
             ((casilla * ) tablero[i][j])->barco =  0;
         }
     }
