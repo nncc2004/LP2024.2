@@ -22,4 +22,5 @@ void * disparo500KG(int x, int y);
 
 //Propias
 extern void *** tablero;
+extern int T;
 #endif

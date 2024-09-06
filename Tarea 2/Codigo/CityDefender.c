@@ -23,9 +23,9 @@ int main(int argc, char const *argv[])
         }
     system(limpiar);
     
-    inicializarTablero(4);
-    inicializarMazo();
     
+    inicializarMazo();
+    inicializarTablero(6);
     Barco bar;
     bar.largo = 2;
     bar.particiones_activas = 3;
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
         mostrarTablero();
         mostrarMazo();
         usarCarta();
-        system(limpiar);
+        //system(limpiar);
     }
     
     
