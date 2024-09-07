@@ -24,6 +24,12 @@ void * disparo500KG(int x, int y);
 extern const char *limpiar;
 extern void *** tablero;
 extern int T;
-void * canion_destruido(int x, int y);
+void * canionDestruido(int x, int y);
+extern int cantAciertos;
+extern Barco * BarcosTablero;
+void restarParticion(int pos);
+void mapaVictoria();
+void mapaDerrota();
+void liberarMazo();
 
 #endif

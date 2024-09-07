@@ -29,29 +29,40 @@ void mostrarMazo(){
 void usarCarta(){
     printf("Ingrese la carta a usar: ");
     scanf("%d", &cartaElegida);
+    while(cartaElegida <= 0 || cartaElegida > 5){
+        printf("Ingres una carta valida: ");
+        scanf("%d", &cartaElegida);
+    }
     int x, y;
     printf("Coordenada X del disparo: ");
     scanf("%d", &x);
+    while(x < 0 || x>=T){
+        printf("Ingrese una coordenada X dentro del tablero\n");
+        printf("Coordenada X del disparo: ");
+        scanf("%d", &x);
+    }
     printf("Coordenada Y del disparo: ");
     scanf("%d", &y); 
-    system(limpiar);
+    while(y < 0 || y>=T){
+        printf("Ingrese una coordenada Y dentro del tablero\n");
+        printf("Coordenada Y del disparo: ");
+        scanf("%d", &y);
+    }
     printf("Disparo a las coordenadas (%d,%d)\n", x,y);
 
     void * nuevaFuncion = ((void *(*)(int, int))Cartas.carta[cartaElegida-1])(x, y);
     Cartas.carta[cartaElegida-1] = nuevaFuncion;
 }   
 
-
 void * disparoSimple(int x, int y){
-    if (x == -1 && y == -1) return "Disparo simple";
-
+    if (x == -1 && y == -1) return "\033[0;36mDisparo simple\033[0m";
     //Lógica de disparo:
     if(((casilla * ) tablero[x][y])->barco == 1){
         ((casilla * ) tablero[x][y])->simbolo = 'H';
         ((casilla * ) tablero[x][y])->barco = 2;
         printf("Le has dado a un barco en (%d, %d)\n",x, y);
-        //((casilla * ) tablero[x][y])->n_barco
-        //Este es la posicion del arrego del barco que debemos modificar (Restar 1 a particiones_activas)
+        cantAciertos--;
+        restarParticion(((casilla * ) tablero[x][y])->n_barco);
     }else if(((casilla * ) tablero[x][y])->barco == 0){
         ((casilla * ) tablero[x][y])->simbolo = 'X';
     }
@@ -76,7 +87,7 @@ void * disparoSimple(int x, int y){
     
 }
 void * disparoGrande(int x, int y){
-    if (x == -1 && y == -1) return "Disparo grande";
+    if (x == -1 && y == -1) return "\033[0;35mDisparo grande\033[0m";
 
     x--;
     y--;
@@ -87,7 +98,8 @@ void * disparoGrande(int x, int y){
                     ((casilla * ) tablero[x+j][y+i])->simbolo = 'H';
                     ((casilla * ) tablero[x+j][y+i])->barco = 2;
                     printf("Le has dado a un barco en (%d, %d)\n",x+j, y+i);
-                    //((casilla * ) tablero[x+j][y+i])->n_barco
+                    cantAciertos--;
+                    restarParticion(((casilla * ) tablero[x+j][y+i])->n_barco);
                     //Este es la posicion del arrego del barco que debemos modificar (Restar 1 a particiones_activas)
                 }else if(((casilla * ) tablero[x+j][y+i])->barco == 0){
                     ((casilla * ) tablero[x+j][y+i])->simbolo = 'X';
@@ -117,7 +129,7 @@ void * disparoGrande(int x, int y){
 
 }
 void * disparoLineal(int x, int y){
-    if (x == -1 && y == -1) return "Disparo lineal";
+    if (x == -1 && y == -1) return "\033[0;33mDisparo lineal\033[0m";
     int orientacion;
     printf("¿Vertical (0) u horizontal (1)?: ");
     scanf("%d", &orientacion);
@@ -135,8 +147,8 @@ void * disparoLineal(int x, int y){
                     ((casilla * ) tablero[x+i][y])->simbolo = 'H';
                     ((casilla * ) tablero[x+i][y])->barco = 2;
                     printf("Le has dado a un barco en (%d, %d)\n",x+i, y);
-                    //((casilla * ) tablero[x+j][y+i])->n_barco
-                    //Este es la posicion del arrego del barco que debemos modificar (Restar 1 a particiones_activas)
+                    cantAciertos--;
+                    restarParticion(((casilla * ) tablero[x+i][y])->n_barco);
                 }else if(((casilla * ) tablero[x+i][y])->barco == 0){
                     ((casilla * ) tablero[x+i][y])->simbolo = 'X';
                 }
@@ -146,8 +158,8 @@ void * disparoLineal(int x, int y){
                     ((casilla * ) tablero[x][y+i])->simbolo = 'H';
                     ((casilla * ) tablero[x][y+i])->barco = 2;
                     printf("Le has dado a un barco en (%d, %d)\n",x+i, y);
-                    //((casilla * ) tablero[x+j][y+i])->n_barco
-                    //Este es la posicion del arrego del barco que debemos modificar (Restar 1 a particiones_activas)
+                    cantAciertos--;
+                    restarParticion(((casilla * ) tablero[x][y+i])->n_barco);
                 }else if(((casilla * ) tablero[x][y+i])->barco == 0){
                     ((casilla * ) tablero[x][y+i])->simbolo = 'X';
                 }
@@ -175,7 +187,7 @@ void * disparoLineal(int x, int y){
 
 }
 void * disparoRadar(int x, int y){
-    if (x == -1 && y == -1) return "Disparo radar";
+    if (x == -1 && y == -1) return "\033[0;32mDisparo radar\033[0m";
     x = x-2;
     y = y -2;
     for (int i = 0; i<5; i++){
@@ -207,7 +219,7 @@ void * disparoRadar(int x, int y){
     }
 }
 void * disparo500KG(int x, int y){
-    if (x == -1 && y == -1) return "Disparo 500KG";
+    if (x == -1 && y == -1) return "\033[0;31mDisparo 500KG\033[0m";
 
     
     x = x-5;
@@ -219,8 +231,8 @@ void * disparo500KG(int x, int y){
                     ((casilla * ) tablero[x+j][y+i])->simbolo = 'H';
                     ((casilla * ) tablero[x+j][y+i])->barco = 2;
                     printf("Le has dado a un barco en (%d, %d)\n",x+j, y+i);
-                    //((casilla * ) tablero[x+j][y+i])->n_barco
-                    //Este es la posicion del arrego del barco que debemos modificar (Restar 1 a particiones_activas)
+                    cantAciertos--;
+                    restarParticion(((casilla * ) tablero[x+j][y+i])->n_barco);
                 }else  if(((casilla * ) tablero[x+j][y+i])->barco == 0){
                     ((casilla * ) tablero[x+j][y+i])->simbolo = 'X';
                 }
@@ -231,12 +243,20 @@ void * disparo500KG(int x, int y){
     Flag500KG = 0;
     //Cartas.disponibles --;
 
-    return (void *)canion_destruido; //Aquí debo retornar algo para des habilitar ese cañon!!
+    return (void *)canionDestruido; //Aquí debo retornar algo para des habilitar ese cañon!!
 }
-void * canion_destruido(int x, int y){
-    if (x == -1 && y == -1) return "Cañón destruido";
+void * canionDestruido(int x, int y){
+    if (x == -1 && y == -1) return "\033[0;31mCañón destruido\033[0m";
     printf("Este cañón no se puede utilizar, selecciona otra carta\n");
     usarCarta();
-    return (void *)canion_destruido;
+    return (void *)canionDestruido;
+
+}
+
+void liberarMazo(){
+    if(Cartas.carta == NULL) return;
+    free(Cartas.carta);
+    Cartas.carta = NULL;
+    Cartas.disponibles = 0; 
 
 }
