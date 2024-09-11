@@ -1,24 +1,23 @@
-# Variables
-CC = gcc        # El compilador a usar
-CFLAGS = -Wall -g  # Opciones del compilador (activar todas las advertencias y modo depuración)
+CC = gcc #Se selecciona el compilador
+CFLAGS = -Wall -g #Vi en internet que esto había que ponerlo
+OBJ = Tablero.o Cartas.o CityDefender.o
 
-# Objetivo: El ejecutable final
-all: CityDefender
 
-# Cómo construir el ejecutable a partir de los archivos objeto
-CityDefender: CityDefender.o Tablero.o Cartas.o
-	$(CC) $(CFLAGS) -o CityDefender CityDefender.o Tablero.o Cartas.o
+all: ejecutable
 
-# Cómo construir cada archivo objeto a partir de los archivos .c y .h
-CityDefender.o: CityDefender.c Cartas.h Tablero.h
-	$(CC) $(CFLAGS) -c CityDefender.c
+ejecutable: $(OBJ)
+	$(CC) -o ejecutable $(OBJ)
 
-Tablero.o: Tablero.c Tablero.h
+
+
+Tablero.o: Tablero.c  Tablero.h
 	$(CC) $(CFLAGS) -c Tablero.c
 
-Cartas.o: Cartas.c Cartas.h Tablero.h
+Cartas.o: Cartas.c  Cartas.h
 	$(CC) $(CFLAGS) -c Cartas.c
 
-# Limpiar los archivos generados (.o y ejecutables)
+CityDefender.o: CityDefender.c Tablero.h Cartas.h
+	$(CC) $(CFLAGS) -c CityDefender.c
+
 clean:
-	rm -f *.o CityDefender
+	rm -f *.o ejecutable

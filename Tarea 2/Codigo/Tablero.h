@@ -21,4 +21,5 @@ void crearBarco(Barco *bar);
 void iniciarBarcos(int dificultad);
 void liberarTablero();
 void liberarBarcos();
+extern int CantidadBarcos;
 #endif

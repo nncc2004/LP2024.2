@@ -5,9 +5,22 @@
 #include "Tablero.h"
 
 void teclaContinuar(){
+    /*
+    no recibe parámetros
+
+    //////////////////////////////////////
+
+    La función se encarga de hacer al suuario ingresar "Enter" para ir a la siguiente "pantalla"
+    Lo hace mediante un wihle que en su propia condicion lee y limpia el buffer hasat que sea enter
+    Luego vuelve a limpiar el buffer para evitar problemas mas adelante.
+
+    //////////////////////////////////////
+    
+    No hay retorno
+    */
     printf("\nPresione 'Enter' para continuar . . .");
     while (getchar() != '\n');
-        getchar(); 
+    getchar(); 
 }
 const char *limpiar;
 int dificultad;
@@ -55,13 +68,16 @@ int main(int argc, char const *argv[]){
     default:
         break;
     }
+    printf("\nCuentas con 5 disparos disponibles: \n   - Disparo simple: 1x1 \n   - Disparo grande: 3x3\n   - Disparo radar 5x5 (muestra barcos)\n   - Disparo lineal: 1x5 o 5x1\n   - Disparo 500Kg: 11x11  (solo una vez)");
+
     iniciarBarcos(dificultad);
     inicializarMazo();
     teclaContinuar();
     system(limpiar);
     //////////////////////// Logica de los turnos //////////////////////////////
     while (turnos > 0 && cantAciertos >0){
-        printf("Turno %d)\n", turnos);
+        printf("Turnos restantes: %d\n", turnos);
+        printf("Barcos restantes: %d\n", CantidadBarcos);
         mostrarTablero();
         mostrarMazo();
         usarCarta();
@@ -73,15 +89,17 @@ int main(int argc, char const *argv[]){
     //////////////////////// Victoria o derrota //////////////////////////////
     if(turnos == 0) {
         printf("Perdiste!!!\n");
+        printf("Faltaron %d barcos\n", CantidadBarcos);
         mapaDerrota();
         mostrarTablero();
     }
     if(cantAciertos == 0) {
         printf("Ganaste!!!\n");
+        printf("Restaron %d turnos antes de la invasión\n", turnos);
         mapaVictoria();    
         mostrarTablero();
     }
-
+    teclaContinuar();
     //////////////////////// Liberar memoria //////////////////////////////
     liberarTablero();
     liberarMazo();
