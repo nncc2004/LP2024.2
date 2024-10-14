@@ -18,7 +18,8 @@ public class Nave{
     }
     public void recargarPropulsores(int hidrogeno){
         float unidadesRecargadas = (float) 0.6 * hidrogeno * (1+ eficienciaPropulsor);
-        unidadesCombustible  = unidadesCombustible - unidadesRecargadas;
+        unidadesCombustible  = unidadesCombustible + unidadesRecargadas;
+        System.out.println("Unidades recargadas: "+ unidadesRecargadas);
     }
 
     public void reducirCombustible(int tamanioSalto){
@@ -28,6 +29,9 @@ public class Nave{
     public void reinicio(){
         unidadesCombustible = 100;
         eficienciaPropulsor = 0;
+    }
+    public void aumentarEficienciaNave(float aumento){
+        eficienciaPropulsor += aumento;
     }
 
     //getters y setters

@@ -1,5 +1,7 @@
 
+
 import java.util.Scanner;
+
 
 public class NoJavaSky{
     public static void main(String[] args) {
@@ -7,18 +9,24 @@ public class NoJavaSky{
         MapaGalactico mapa = new MapaGalactico();
         mapa.generadorPlaneta();
         Jugador jugador = new Jugador();
-        Nave nave = new Nave();
-
+        Nave nave = jugador.getNave();
+        procesamiento pr = new procesamiento();
         boolean Ganar = false;
         int opcion = -1;
-        String linea = "\n\n-";
-        for (int i = 0; i < 100; i++) {
-            linea = linea+"-";
+
+        for (int i = 0; i < 10; i++) {
+            mapa.generadorPlaneta(); //Borrar luego!!
         }
+
+        Planeta actual;
+        int tamanioSalto;
+        int direccion;
+        int respuestaGral;
+
         while(!Ganar && opcion != 0){
-            
-            
-            System.out.println(linea);
+            actual = mapa.getPlanetaActual();
+            pr.separador();
+
             if(jugador.getEstado().equals("orbita")){
                 System.out.println("Actualmente te encuentras orbitando el planeta ("+ mapa.getPosicion()+") de tipo " + mapa.getNombrePlanetaActual());
                 System.out.println("Tus opciones son:");
@@ -29,39 +37,67 @@ public class NoJavaSky{
                 System.out.println("5. Descubrir nuevo planeta");
                 System.out.println("6. Recargar combustible");
                 System.out.println("7. Recargar energia traje");
-                System.out.println("8. Ver informacion personal y de la nave");
+                System.out.println("8. Ver informacion nave, traje e inventario");
                 System.err.print("Ingrese su respuesta: ");
                 opcion = scan.nextInt();
-                System.err.println("");
+                System.out.println("");
 
                 switch (opcion) {
                     case 0 -> {
                         System.out.println("Hasta pronto!");
                     }
                     case 1 -> {
-                        Planeta actual = mapa.getPlanetaActual();
-                        System.out.println("Las caracteristicas generales del planeta son las siguientes:");
-                        System.out.println("Es un planeta de tipo " + actual.getClass().getSimpleName() + " de radio "+ actual.getRadio() + " metros.");
-                        System.out.println("Cantidad de Flores de Sodio: "+ actual.getFloresDeSodio());
-                        System.out.println("Cantidad de Cristales de Hidrogeno: " + actual.getCristalesHidrogeno());
-
-
-                        switch (actual) {
-                            case Volcanico volcanico -> {
-                                System.out.println("Cantidad de platino: " + volcanico.getPlatino());
-                                System.out.println("Temperatura: " + volcanico.getTemperatura() + " grados");
-                            }
-                            case Radiactivo radiactivo -> {
-                                System.out.println("Cantidad de uranio: " + radiactivo.getUranio());
-                                System.out.println("Radiacion: " + radiactivo.getRadiacion());
-                            }
-                            case Helado helado -> System.err.println("Temperatura: " + helado.getTemperatura() + " grados");
-                            case Oceanico oceanico -> System.err.println("Profundidad: " + oceanico.getProfundidad() + " metros");
-                            default -> System.out.println("Tipo de planeta desconocido.");
-                        }
+                        pr.mostrarDetallePlaneta(actual);
                         
-                        System.out.println("Presione alguna tecla para continuar...");
-                        scan.next();
+                        
+                    }
+                    case 2-> {
+                        System.out.println("Accediendo al planeta....");
+                        System.err.println("El acercamiento ha sido un exito.");
+                        actual.visitar(jugador);
+                    }
+                    case 3 -> {
+                        System.out.println("Cargando mapa galactico....");
+                        mapa.Mostrar();
+                    }
+                    case 4 -> {
+                        System.out.print("Ingrese la distancia que va a recorrer: ");
+                        tamanioSalto = scan.nextInt();
+                        System.out.print("Ingrese la direccion del salto (1: negativo; 2; positivo): ");
+                        direccion= scan.nextInt();
+                        mapa.viajar(nave, tamanioSalto, direccion);
+                    }
+                    case 5 -> {
+                        mapa.descubrirSiguiente();
+                    }
+                    case 6 -> {
+                        System.out.println("Para recargar combustible se debe usar hidrogeno.");
+                        System.err.println("Unidades disponibles: " + jugador.getHidrogeno());
+                        System.out.print("Cuantas desea usar? ");
+                        respuestaGral = scan.nextInt();
+                        while(respuestaGral < 0 || respuestaGral > jugador.getHidrogeno()){
+                            System.out.print("Ingrese un valor entre 0 y " + jugador.getHidrogeno());
+                            respuestaGral = scan.nextInt();
+                        }
+                        jugador.setHidrogeno(jugador.getHidrogeno()-respuestaGral);
+                        nave.recargarPropulsores(respuestaGral);
+                        System.out.println("Nueva cantidad de combustible en la nave: "+nave.getUnidadesCombustible());
+
+                    }
+                    case 7 -> {
+                        System.out.println("Para recargar la energia del traje se debe usar sodio.");
+                        System.err.println("Unidades disponibles: " + jugador.getSodio());
+                        System.out.print("Cuantas desea usar? ");
+                        respuestaGral = scan.nextInt();
+                        while(respuestaGral < 0 || respuestaGral > jugador.getSodio()){
+                            System.out.print("Ingrese un valor entre 0 y " + jugador.getSodio());
+                            respuestaGral = scan.nextInt();
+                        }
+                        jugador.recargarEnergiaProteccion(respuestaGral);
+                        System.out.println("Nueva cantidad de energia de proteccion en el traje: "+ jugador.getUnidadesEnergiaProteccion());
+                    }
+                    case 8 -> {
+                        pr.infoNaveJugador(nave, jugador);
                     }
                     default ->{
                         System.out.println("Ingrese un valor valido");
@@ -79,16 +115,58 @@ public class NoJavaSky{
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case 1 -> {
+                        if(actual.salir()){
+                            jugador.setEstado("orbita");
+                            System.out.println("Ya se encuentra en orbita.");
+                        }
+                    }
+                    case 2 -> {
+                        pr.mostrarDetallePlaneta(actual);
+                        
+                    }
+                    case 3 -> {                        
+                        int recurso = pr.mostrarMateriales(actual);
+                        int cantExtraccion = actual.extraerRecursos(recurso);
+                        float consumoEnergia = actual.calcularConsumoEnergia();
+                        jugador.reducirEnergiaProteccion(cantExtraccion, consumoEnergia);
+                        pr.guardarMaterialInventario(cantExtraccion, jugador, recurso, actual);
+                        
+                        if(jugador.getUnidadesEnergiaProteccion() <= 0){
+                            System.out.println("Oh No! Te has quedado sin energia de proteccion en tu traje!. ");
+                            System.out.println("La nave te ha llevado al inicio, pero has perdido tu inventario.");
+                            System.out.println("Se ha reiniciado tu energia de proteccion y combustible, pero se han guardado las mejoras hechas a las eficiencias.\n");
+                            pr.reiniciar(mapa, jugador, nave);
+                        } else{
+                            System.out.println("Todo extraido correctamente. Se ha almacenado el material en tu inventario.");
+                            System.out.println("Energia del traje: "+jugador.getUnidadesEnergiaProteccion());
+                        }
 
+
+
+                    }
+                    case 4 ->{
+                        switch (actual) {
+                            case Helado helado -> {
+                                helado.visitarAsentamientos(jugador);
+                            }
+                            case Oceanico oceanico -> {
+                                oceanico.visitarAsentamientos(jugador);
+                            }
+                            
+                            default -> System.out.println("    - Solos los planetas helados y oceanicos tienen asentamientos!");
+                        }
                     }
                     default ->{
                         System.out.println("Ingrese un valor valido");
                     }                    
                 }
             }
-
+            System.out.println("\nPresione 0 para continuar...");
+            scan.nextInt();
+            pr.limpiar();
             
-        }
-    
+            
+        }    
+        scan.close();
     }
 }

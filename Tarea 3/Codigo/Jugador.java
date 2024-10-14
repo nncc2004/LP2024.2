@@ -2,11 +2,13 @@ public class Jugador {
     private float unidadesEnergiaProteccion;
     private float eficienciaEnergiaProteccion;
     private String estado; //planeta u orbita
+    private Nave nave;
 
     //Inventario
     private float Hidrogeno;
     private float Sodio;
     private float Uranio;
+    private float Platino;
 
     //Constructor
     public Jugador(){
@@ -15,21 +17,24 @@ public class Jugador {
         this.Hidrogeno = 0;
         this.Sodio = 0;
         this.Uranio = 0;
+        this.Platino = 0;
         this.estado = "orbita";
+        this.nave = new Nave();
 
     }
 
     //Metodos
     public void recargarEnergiaProteccion(int sodio){
         float unidadesRecargadas = (float) 0.65* sodio * (1+ eficienciaEnergiaProteccion);
-        unidadesEnergiaProteccion = unidadesEnergiaProteccion + unidadesRecargadas;
+        unidadesEnergiaProteccion += unidadesRecargadas;
         Sodio = Sodio - sodio;
+        System.out.println("Se han recargado "+unidadesRecargadas+" unidades de energia.");
 
     }
 
-    public void reducirEnergiaProteccion(int cantExtraccion, int ConsumoEnergia){
+    public void reducirEnergiaProteccion(int cantExtraccion, float ConsumoEnergia){
         float unidadesConsumidas = (float) 0.5 *cantExtraccion * (ConsumoEnergia/100)*(1 - eficienciaEnergiaProteccion);
-        unidadesEnergiaProteccion = unidadesEnergiaProteccion - unidadesConsumidas;
+        unidadesEnergiaProteccion -= unidadesConsumidas;
 
     }
     public void reinicio(){
@@ -38,7 +43,11 @@ public class Jugador {
         Hidrogeno = 0;
         Sodio = 0;
         Uranio = 0;
+        Platino = 0;
         estado = "orbita";
+    }
+    public void aumentarEficienciaTraje(float aumento){
+        eficienciaEnergiaProteccion += aumento;
     }
 
 
@@ -78,5 +87,16 @@ public class Jugador {
 
     public void setUranio(float Uranio) {
         this.Uranio = Uranio;
+    }
+    public float getPlatino() {
+        return Platino;
+    }
+
+    public void setPlatino(float Platino) {
+        this.Platino = Platino;
+    }
+
+    public Nave getNave(){
+        return nave;
     }
 }

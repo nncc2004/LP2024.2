@@ -52,7 +52,11 @@ public class MapaGalactico{
         System.out.println("Hay un total de "+ tamanoLista + " planetas descubiertos:");
         int i = 0;
         for (Planeta planeta :planetas){
-            System.out.println(i+ ". " + planeta.getClass().getSimpleName());
+            if (i == posicion){
+                System.out.println(i+ ". " + planeta.getClass().getSimpleName() + " (pos. actual)");
+            } else {
+                System.out.println(i+ ". " + planeta.getClass().getSimpleName());
+            }
             i= i +1;
         }
         System.out.println("\n");
@@ -82,16 +86,21 @@ public class MapaGalactico{
         }
 
         if(futuraPoscion >= tamanoLista || futuraPoscion < 0){
-            System.out.println("Elige un planeta disponible en el mapa!\n");
+            System.out.println("Elige un planeta disponible en el mapa!");
+            System.out.println("Viaje abortado.\n");
             return;
         }
         if(unidadesConsumidas >= nave.getUnidadesCombustible()){
             System.out.println("El planeta esta muy lejos y te vas a quedar sin combustible!");
             System.out.println("Elige otro planeta o recarga combustible!\n");
+            System.out.println("Combustible actual: "+ nave.getUnidadesCombustible());
+            System.out.println("Combustible necesario para el viaje: "+ unidadesConsumidas);
+            System.out.println("Viaje abortado.\n");
             return;
         }
 
-
+        System.out.println("Viaje exitoso!");
+        System.out.println("Combustible consumido: "+ unidadesConsumidas + "\n");
         nave.reducirCombustible(tamanoSalto);
         posicion = futuraPoscion;
 
