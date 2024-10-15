@@ -11,21 +11,19 @@ public class NoJavaSky{
         Jugador jugador = new Jugador();
         Nave nave = jugador.getNave();
         procesamiento pr = new procesamiento();
-        boolean Ganar = false;
         int opcion = -1;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 150; i++) {
             mapa.generadorPlaneta(); //Borrar luego!!
         }
-
+        pr.limpiar();
         Planeta actual;
         int tamanioSalto;
         int direccion;
         int respuestaGral;
 
-        while(!Ganar && opcion != 0){
+        while(!(jugador.getVictoria()) && opcion != 0 && !(jugador.getDerrota())){
             actual = mapa.getPlanetaActual();
-            pr.separador();
 
             if(jugador.getEstado().equals("orbita")){
                 System.out.println("Actualmente te encuentras orbitando el planeta ("+ mapa.getPosicion()+") de tipo " + mapa.getNombrePlanetaActual());
@@ -38,13 +36,13 @@ public class NoJavaSky{
                 System.out.println("6. Recargar combustible");
                 System.out.println("7. Recargar energia traje");
                 System.out.println("8. Ver informacion nave, traje e inventario");
+                System.out.println("0. Terminar la partida");
                 System.err.print("Ingrese su respuesta: ");
                 opcion = scan.nextInt();
                 System.out.println("");
 
                 switch (opcion) {
                     case 0 -> {
-                        System.out.println("Hasta pronto!");
                     }
                     case 1 -> {
                         pr.mostrarDetallePlaneta(actual);
@@ -52,8 +50,6 @@ public class NoJavaSky{
                         
                     }
                     case 2-> {
-                        System.out.println("Accediendo al planeta....");
-                        System.err.println("El acercamiento ha sido un exito.");
                         actual.visitar(jugador);
                     }
                     case 3 -> {
@@ -112,12 +108,15 @@ public class NoJavaSky{
                 System.out.println("2. Obtener informacion del planeta actual");
                 System.out.println("3. Extraer recursos");
                 System.out.println("4. Buscar asentamientos");
+                System.out.println("0. Terminar la partida");
+                System.err.print("Ingrese su respuesta: ");
                 opcion = scan.nextInt();
                 switch (opcion) {
+                    case 0 -> {
+                    }
                     case 1 -> {
                         if(actual.salir()){
                             jugador.setEstado("orbita");
-                            System.out.println("Ya se encuentra en orbita.");
                         }
                     }
                     case 2 -> {
@@ -130,8 +129,8 @@ public class NoJavaSky{
                         float consumoEnergia = actual.calcularConsumoEnergia();
                         jugador.reducirEnergiaProteccion(cantExtraccion, consumoEnergia);
                         pr.guardarMaterialInventario(cantExtraccion, jugador, recurso, actual);
-                        
-                        if(jugador.getUnidadesEnergiaProteccion() <= 0){
+                        if (cantExtraccion != -1){
+                            if(jugador.getUnidadesEnergiaProteccion() <= 0){
                             System.out.println("Oh No! Te has quedado sin energia de proteccion en tu traje!. ");
                             System.out.println("La nave te ha llevado al inicio, pero has perdido tu inventario.");
                             System.out.println("Se ha reiniciado tu energia de proteccion y combustible, pero se han guardado las mejoras hechas a las eficiencias.\n");
@@ -139,8 +138,10 @@ public class NoJavaSky{
                         } else{
                             System.out.println("Todo extraido correctamente. Se ha almacenado el material en tu inventario.");
                             System.out.println("Energia del traje: "+jugador.getUnidadesEnergiaProteccion());
-                        }
+                            }
 
+                        }
+                        
 
 
                     }
@@ -161,12 +162,13 @@ public class NoJavaSky{
                     }                    
                 }
             }
-            System.out.println("\nPresione 0 para continuar...");
-            scan.nextInt();
+            pr.enterContinuar();
             pr.limpiar();
             
             
         }    
         scan.close();
+        System.out.println("Hasta pronto!");
     }
+
 }

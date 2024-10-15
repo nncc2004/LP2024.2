@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class procesamiento {
@@ -31,6 +32,7 @@ public class procesamiento {
         System.out.println("\nInformacion traje: ");
         System.out.println("    - Energia proteccion traje: "+jugador.getUnidadesEnergiaProteccion());
         System.out.println("    - Eficiencia traje: "+jugador.getEficienciaEnergiaProteccion());
+        System.out.println("    - Vidas restantes: "+jugador.getVidas());
         System.out.println("\nInventario:");
         System.out.println("    - Unidades de Sodio: "+jugador.getSodio());
         System.out.println("    - Unidades de Hidrogeno: "+jugador.getHidrogeno());
@@ -119,15 +121,24 @@ public class procesamiento {
         nave.reinicio();
     }
 
-    public void separador(){
-        for (int i = 0; i < 100; i++) {
-            System.out.print("-");
-        }
-        System.out.println("\n");
-    }
     public void limpiar(){
-        for (int i = 0; i < 100; i++) {
-            System.out.println(" ");
+        try {
+            if(System.getProperty("os.name").contains("Windows")){
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (IOException | InterruptedException ex) {
+        }
+
+    }
+
+    public void enterContinuar(){
+        System.out.println("Presione 'enter' para continuar...");
+        try {
+            System.in.read();
+        } catch (IOException e) {
         }
     }
+
 }

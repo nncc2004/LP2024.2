@@ -11,8 +11,8 @@ public class  Oceanico extends Planeta implements tieneAsentamientos{
 
         this.profundidad = aleatorio.nextInt(1000 - 30 + 1) + 30;
         
-        long cristalesHidrogeno = (long)(0.2 * 4 * Math.PI * Math.pow(radio, 2));
-        long floresDeSodio = (long)(0.65 * 4 * Math.PI * Math.pow(radio, 2));
+        int cristalesHidrogeno = (int)(0.2 * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int)(0.65 * 4 * Math.PI * Math.pow(radio, 2));
 
         super.setRadio(radio);
         super.setCristalesHidrogeno(cristalesHidrogeno);
@@ -45,7 +45,7 @@ public class  Oceanico extends Planeta implements tieneAsentamientos{
         switch (respuesta) {
             case 1-> {
                 System.err.println("Por un 5% extra de eficiencia en tu traje te cobraremos 100.000 unidades de Platino");
-                System.out.print("Aceptas? (1: si | 2 : no)");
+                System.out.print("Aceptas? (1: si | 2 : no) ");
                 respuesta = scan.nextInt();
                 while( respuesta != 0 && respuesta != 1){
                     respuesta = scan.nextInt();
@@ -70,7 +70,7 @@ public class  Oceanico extends Planeta implements tieneAsentamientos{
                 Nave nave = jugador.getNave();
 
                 System.err.println("Por un 5% extra de eficiencia en tu nave te cobraremos 150.000 unidades de Platino");
-                System.out.print("Aceptas? (1: si | 2 : no)");
+                System.out.print("Aceptas? (1: si | 2 : no) ");
                 respuesta = scan.nextInt();
                 while( respuesta != 0 && respuesta != 1){
                     respuesta = scan.nextInt();

@@ -3,6 +3,9 @@ public class Jugador {
     private float eficienciaEnergiaProteccion;
     private String estado; //planeta u orbita
     private Nave nave;
+    private boolean victoria;
+    private boolean derrota;
+    private int vidas;
 
     //Inventario
     private float Hidrogeno;
@@ -20,6 +23,9 @@ public class Jugador {
         this.Platino = 0;
         this.estado = "orbita";
         this.nave = new Nave();
+        this.victoria = false;
+        this.victoria = false;
+        this.vidas = 3;
 
     }
 
@@ -45,6 +51,13 @@ public class Jugador {
         Uranio = 0;
         Platino = 0;
         estado = "orbita";
+        vidas -=1;
+        System.out.println("Has perdido una vida! Vidas restantes: "+ vidas);
+        if(vidas == 0 ){
+            System.out.println("Oh no! Te has quedado sin vidas. ");
+            System.out.println("Game over...");
+            derrota = true;
+        }
     }
     public void aumentarEficienciaTraje(float aumento){
         eficienciaEnergiaProteccion += aumento;
@@ -98,5 +111,25 @@ public class Jugador {
 
     public Nave getNave(){
         return nave;
+    }
+
+    public boolean getVictoria(){
+        return victoria;
+    }
+
+    public void setVictoria(boolean bool){
+        victoria = bool;
+    }
+
+    public boolean getDerrota(){
+        return derrota;
+    }
+
+    public void setDerrota(boolean bool){
+        derrota = bool;
+    }
+
+    public int getVidas(){
+        return vidas;
     }
 }

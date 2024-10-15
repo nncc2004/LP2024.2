@@ -10,8 +10,8 @@ public class Helado extends Planeta implements tieneAsentamientos {
         Random aleatorio = new Random();
 
         int radio = aleatorio.nextInt(1000000 - 1000 + 1) + 1000;
-        long cristalesHidrogeno = (long)(0.65 * 4 * Math.PI * Math.pow(radio, 2));
-        long floresDeSodio = (long)(0.35 * 4 * Math.PI * Math.pow(radio, 2));
+        int cristalesHidrogeno = (int)(0.65 * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int)(0.35 * 4 * Math.PI * Math.pow(radio, 2));
 
         this.temperatura = aleatorio.nextInt(120 - 30 + 1) - 120;
 
@@ -45,7 +45,7 @@ public class Helado extends Planeta implements tieneAsentamientos {
         switch (respuesta) {
             case 1-> {
                 System.err.println("Por un 5% extra de eficiencia en tu traje te cobraremos 100.000 unidades de Platino");
-                System.out.print("Aceptas? (1: si | 2 : no)");
+                System.out.print("Aceptas? (1: si | 2 : no) ");
                 respuesta = scan.nextInt();
                 while( respuesta != 0 && respuesta != 1){
                     respuesta = scan.nextInt();
@@ -70,7 +70,7 @@ public class Helado extends Planeta implements tieneAsentamientos {
                 Nave nave = jugador.getNave();
 
                 System.err.println("Por un 5% extra de eficiencia en tu nave te cobraremos 150.000 unidades de Platino");
-                System.out.print("Aceptas? (1: si | 2 : no)");
+                System.out.print("Aceptas? (1: si | 2 : no) ");
                 respuesta = scan.nextInt();
                 while( respuesta != 0 && respuesta != 1){
                     respuesta = scan.nextInt();

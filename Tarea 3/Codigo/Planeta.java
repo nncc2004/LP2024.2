@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public abstract class Planeta{
     private int radio;
-    private long cristalesHidrogeno;
-    private long  floresDeSodio;
+    private int cristalesHidrogeno;
+    private int  floresDeSodio;
 
 
 
@@ -16,25 +16,27 @@ public abstract class Planeta{
         this.radio = radio;
     }
 
-    public long getCristalesHidrogeno() {
+    public int getCristalesHidrogeno() {
         return cristalesHidrogeno;
     }
 
-    public void setCristalesHidrogeno(long cristalesHidrogeno) {
+    public void setCristalesHidrogeno(int cristalesHidrogeno) {
         this.cristalesHidrogeno = cristalesHidrogeno;
     }
 
-    public long getFloresDeSodio() {
+    public int getFloresDeSodio() {
         return floresDeSodio;
     }
 
-    public void setFloresDeSodio(long  floresDeSodio) {
+    public void setFloresDeSodio(int  floresDeSodio) {
         this.floresDeSodio = floresDeSodio;
     }
 
 
     //metodos
     public boolean visitar(Jugador jugador){
+        System.out.println("Accediendo al planeta....");
+        System.err.println("El acercamiento ha sido un exito.");
         jugador.setEstado("planeta");
         return true;
     }

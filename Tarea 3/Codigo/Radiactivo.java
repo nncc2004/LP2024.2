@@ -12,8 +12,8 @@ public class Radiactivo extends Planeta{
         int radio = aleatorio.nextInt(100000 - 10000 + 1) + 10000;
         this.radiacion = aleatorio.nextInt(50 - 10 + 1) + 10;
 
-        long cristalesHidrogeno = (long) (0.2 * 4 * Math.PI * Math.pow(radio, 2));
-        long floresDeSodio = (long)(0.2 * 4 * Math.PI * Math.pow(radio, 2));
+        int cristalesHidrogeno = (int) (0.2 * 4 * Math.PI * Math.pow(radio, 2));
+        int floresDeSodio = (int)(0.2 * 4 * Math.PI * Math.pow(radio, 2));
 
         this.uranio = (long)(0.25 * 4 * Math.PI * Math.pow(radio, 2) * radiacion);
 
@@ -39,14 +39,14 @@ public class Radiactivo extends Planeta{
 
     @Override
     public int extraerRecursos(int tipo){
-        long floresDeSodio = super.getFloresDeSodio();
-        long cristalesHidrogeno = super.getCristalesHidrogeno();
+        int floresDeSodio = super.getFloresDeSodio();
+        int cristalesHidrogeno = super.getCristalesHidrogeno();
         Scanner scan = new Scanner(System.in);
         int cantExtraccion;
         switch (tipo) {
             case 1 ->{ //Cristales de hidrogeno
                 System.out.println("Se ha seleccionado la extraccion de los cristales de hidrogeno. En el planeta hay "+cristalesHidrogeno+" cistrales de hidrogeno.");
-                System.out.println("Cuantas flores deseas extraer?");
+                System.out.println("Cuantos cristales deseas extraer?");
                 cantExtraccion = scan.nextInt();
                 while (cantExtraccion > cristalesHidrogeno && cantExtraccion < 0) { 
                     System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de cristales)");
@@ -57,7 +57,7 @@ public class Radiactivo extends Planeta{
                 }
             case 2 -> { //Flores de sodio
                 System.out.println("Se ha seleccionado la extraccion de las Flores de Sodio. En el planeta hay "+floresDeSodio+" flores de sodio.");
-                System.out.println("Cuantos cristales deseas extraer?");
+                System.out.println("Cuantas flores deseas extraer?");
                 cantExtraccion = scan.nextInt();
                 while (cantExtraccion > floresDeSodio && cantExtraccion < 0) { 
                     System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de flores)");

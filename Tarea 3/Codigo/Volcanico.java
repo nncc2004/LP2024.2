@@ -11,7 +11,7 @@ public class Volcanico extends Planeta{
         int radio = aleatorio.nextInt(100000 - 1000 + 1) + 1000;
         this.temperatura = aleatorio.nextInt(256 - 120 + 1) + 120;
 
-        long cristalesHidrogeno = (long)(0.3 * 4 * Math.PI * Math.pow(radio, 2));
+        int cristalesHidrogeno = (int)(0.3 * 4 * Math.PI * Math.pow(radio, 2));
         this.platino =(long) ((0.25 * 4 * Math.PI * Math.pow(radio, 2)) - (20.5 * Math.pow(temperatura, 2)));
         super.setRadio(radio);
         super.setCristalesHidrogeno(cristalesHidrogeno);
@@ -35,16 +35,16 @@ public class Volcanico extends Planeta{
 
     @Override
     public int extraerRecursos(int tipo){
-        long cristalesHidrogeno = super.getCristalesHidrogeno();
+        int cristalesHidrogeno = super.getCristalesHidrogeno();
         Scanner scan = new Scanner(System.in);
         int cantExtraccion;
         switch (tipo) {
             case 1 ->{ // Cristales de hidrogeno
                 System.out.println("Se ha seleccionado la extraccion de los cristales de hidrogeno. En el planeta hay "+cristalesHidrogeno+" cistrales de hidrogeno.");
-                System.out.println("Cuantas flores deseas extraer?");
+                System.out.println("Cuantas flores deseas extraer? ");
                 cantExtraccion = scan.nextInt();
                 while (cantExtraccion > cristalesHidrogeno && cantExtraccion < 0) { 
-                    System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de cristales)");
+                    System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de cristales) ");
                     cantExtraccion = scan.nextInt();
                 }
                 super.setCristalesHidrogeno(cristalesHidrogeno - cantExtraccion);
@@ -52,10 +52,10 @@ public class Volcanico extends Planeta{
                 }
             case 2 -> { //Platino
                 System.out.println("Se ha seleccionado la extraccion de platino. En el planeta hay "+platino+" unidades.");
-                System.out.println("Cuantas unidades de platino deseas extraer?");
+                System.out.println("Cuantas unidades de platino deseas extraer? ");
                 cantExtraccion = scan.nextInt();
                 while (cantExtraccion > platino && cantExtraccion < 0) { 
-                    System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de platino)");
+                    System.out.println("Ingresa un valor valido. (Entre 0 y la cantidad de platino) ");
                     cantExtraccion = scan.nextInt();
                 }
                 platino = platino - cantExtraccion;
