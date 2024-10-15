@@ -1,5 +1,3 @@
-
-
 import java.util.Scanner;
 
 
@@ -12,10 +10,11 @@ public class NoJavaSky{
         Nave nave = jugador.getNave();
         procesamiento pr = new procesamiento();
         int opcion = -1;
-
+        
         for (int i = 0; i < 150; i++) {
             mapa.generadorPlaneta(); //Borrar luego!!
         }
+        
         pr.limpiar();
         Planeta actual;
         int tamanioSalto;
@@ -61,7 +60,8 @@ public class NoJavaSky{
                         tamanioSalto = scan.nextInt();
                         System.out.print("Ingrese la direccion del salto (1: negativo; 2; positivo): ");
                         direccion= scan.nextInt();
-                        mapa.viajar(nave, tamanioSalto, direccion);
+                        //mapa.viajar(nave, tamanioSalto, direccion);
+                        nave.viajarPlaneta(mapa, direccion, tamanioSalto);
                     }
                     case 5 -> {
                         mapa.descubrirSiguiente();
