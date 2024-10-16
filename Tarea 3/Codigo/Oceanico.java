@@ -5,6 +5,14 @@ public class  Oceanico extends Planeta implements tieneAsentamientos{
     private int profundidad;
 
     public Oceanico(){
+         /*
+        Input: No recibe parametros
+        Este es el constructor de la clase Oceanico, subclase de planeta. Se genera el radio según los parametros dados
+        en las instrucciones y a partir de ahí se generan las flores de sodio  y los cristales de hidrogeno.
+        Con los setters de la superclase se pasa el valor de los atributos.
+
+        Output: No genera output
+        */
         Random aleatorio = new Random();
 
         int radio = aleatorio.nextInt(1000000 - 10000 + 1) + 10000;
@@ -22,18 +30,37 @@ public class  Oceanico extends Planeta implements tieneAsentamientos{
     
     //Getters y setters
     public int getProfundidad() {
+        /*
+        Input: No recibe input
+        Funcionamiento: Getter de la profundidad
+        Retorno: retorna la profundidad
+         */
         return profundidad;
     }
 
     //Metodos
     @Override
     public float calcularConsumoEnergia() {
+        /*
+            Input: No recibe parametros
+            Funcionalidad: Calcula y retorna el consumo de energia del planeta segun la formula dada
+            Output: retorna el valor del calculo del consumo de energia
+
+        */
         return (float)( 0.002 * Math.pow(profundidad, 2));
     }
 
 
     @Override
     public void visitarAsentamientos(Jugador jugador){
+        /*
+         Input: Recibe un objeto de clase Jugador
+         Funcionalidad: El sistema muestra las opciones de compra de los asentamientos y da al usuario a elegir. 
+         En cualquier caso de compra (1 o 2) se verifica que el jugador tenga suficiente del material pedido y se procede
+         a reducir en la cantidad correspondiente. Asimismo, se le suma 0.05 a la eficiencia que corresponda, significando una
+         mejoria del 5%.
+         Retorno: No hay retorno
+         */
         Scanner scan = new Scanner(System.in);
         System.out.println("Bienvenido al asentamiento de este planeta. En que podemos ayudarte hoy?");
         System.err.println("1. Comprar piezas para mejorar eficiencia traje espacial");

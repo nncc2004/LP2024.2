@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+/*
+ Se que no es una funcion pero igual la compento para simplificar. Hay dos posibles estados para un jugador,
+ orbitando un planeta o en el planeta. Segun esto se desplegan dos diferentes menus de opciones, ademas el 
+ jugador cuenta con atributos victoria y derrota que deben ser false para que la partida continue (son las condiciones del while).
+
+ En cada caso (orbita o planeta), se tienen diferentes opciones que se le muestran al usuario, y se recibe su respuesta, que
+ luego con un switch es utilizada para definir a que funciones llamar o en general que hacer.
+ */
+
 
 public class NoJavaSky{
     public static void main(String[] args) {
@@ -11,9 +20,12 @@ public class NoJavaSky{
         procesamiento pr = new procesamiento();
         int opcion = -1;
         
+
+        /*
         for (int i = 0; i < 150; i++) {
-            mapa.generadorPlaneta(); //Borrar luego!!
+            mapa.generadorPlaneta(); 
         }
+        */
         
         pr.limpiar();
         Planeta actual;

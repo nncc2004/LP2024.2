@@ -6,6 +6,14 @@ public class Volcanico extends Planeta{
     private long platino;
 
     public Volcanico(){
+        /*
+        Input: No recibe parametros
+        Funcionalidad: Este es el constructor de la clase Radiactivo, subclase de planeta. Se genera el radio según los parametros dados
+        en las instrucciones y a partir de ahí se generan el Platino, las flores de sodio  y los cristales de hidrogeno.
+        Con los setters de la superclase se pasa el valor de los atributos.
+
+        Output: No genera output
+        */
         Random aleatorio = new Random();
 
         int radio = aleatorio.nextInt(100000 - 1000 + 1) + 1000;
@@ -20,21 +28,44 @@ public class Volcanico extends Planeta{
 
     //Getters y setters
     public long getPlatino() {
+        /*
+         Input: No recibe input
+         Funcionalidad: Getter del Platino
+         Output: retorna el Platino
+         */
         return platino;
     }
 
     public int getTemperatura() {
+        /*
+         Input: No recibe input
+         Funcionalidad: Getter de la temperatura
+         Output: retorna la temperatura
+         */
         return temperatura;
     }
 
     //metodos
     @Override
     public float calcularConsumoEnergia() {
+        /*
+            Input: No recibe parametros
+            Funcionalidad: Calcula y retorna el consumo de energia del planeta segun la formula dada
+            Output: retorna el valor del calculo del consumo de energia
+
+        */
         return (float) 0.08 * temperatura;
     }
 
     @Override
     public int extraerRecursos(int tipo){
+        /*
+         Input: Recibe un entero que representa el tipo de recurso a extraer
+         Funcionalidad: Segu el tipo de recurso elegido para extraer (1 = hidrogeno, 2 = Platino), muestra la cantidad disponible en el planeta, 
+         y se da a elegir al usuario cuantos quiere extraer.
+         se verifica que sea un valor entre 0 y el maximo disponible. Luego resta esa cantidad de recursos del planeta
+         Retorno: Retorna la cantidad de recursos extraida, que luego sera necesario para restar la energia al traje. 
+         */
         int cristalesHidrogeno = super.getCristalesHidrogeno();
         Scanner scan = new Scanner(System.in);
         int cantExtraccion;

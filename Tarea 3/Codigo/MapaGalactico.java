@@ -107,41 +107,6 @@ public class MapaGalactico{
         
     }
 
-    /*
-    public void viajar(Nave nave, int tamanoSalto, int direccion){    
-        int futuraPoscion;
-        float unidadesConsumidas = (float) (0.75* Math.pow(tamanoSalto, 2) * (1- nave.geteficienciaPropulsor()));
-
-        if(direccion == 1){
-            futuraPoscion = posicion - tamanoSalto;
-        } else {
-            futuraPoscion = posicion + tamanoSalto;
-        }
-
-        if(futuraPoscion >= tamanoLista || futuraPoscion < 0){
-            System.out.println("Elige un planeta disponible en el mapa!");
-            System.out.println("Viaje abortado.\n");
-            return;
-        }
-        if(unidadesConsumidas >= nave.getUnidadesCombustible()){
-            System.out.println("El planeta esta muy lejos y te vas a quedar sin combustible!");
-            System.out.println("Elige otro planeta o recarga combustible!\n");
-            System.out.println("Combustible actual: "+ nave.getUnidadesCombustible());
-            System.out.println("Combustible necesario para el viaje: "+ unidadesConsumidas);
-            System.out.println("Viaje abortado.\n");
-            return;
-        }
-
-        System.out.println("Viaje exitoso!");
-        System.out.println("Combustible consumido: "+ unidadesConsumidas + "\n");
-        nave.reducirCombustible(tamanoSalto);
-        posicion = futuraPoscion;
-
-
-    }
-    */
-
-
 
     public void reinicio(){
         /*

@@ -3,7 +3,15 @@ import java.util.Scanner;
 
 public class procesamiento {
     Scanner scan = new Scanner(System.in);
+
     public void mostrarDetallePlaneta(Planeta planeta){
+        /*
+            Input: Recibe un objeto de clase planeta
+            Funcionalidad: Con los getters del planeta, obtiene y muestra por pantalla diferentes atributos del planeta. Primero
+            muestra los genrales y luego segun el tipo de planeta muestra los diferentes atributos especificos de cada uno. 
+            Output: No genera retorno
+
+        */
         System.out.println("Las caracteristicas generales del planeta son las siguientes:");
         System.out.println("    - Es un planeta de tipo " + planeta.getClass().getSimpleName() + " de radio "+ planeta.getRadio() + " metros.");
         System.out.println("    - Cantidad de Flores de Sodio: "+ planeta.getFloresDeSodio());
@@ -26,6 +34,13 @@ public class procesamiento {
     }
 
     public void infoNaveJugador(Nave nave, Jugador jugador){
+        /*
+            Input: Recibe un objeto de tipo Nave y uno de tipo Jugador. 
+            Funcionalidad: Muestra por pantalla la informacion obtenida con los getters de la nave y del jugador. 
+            Output: No genera retorno
+
+        */
+
         System.out.println("Informacion nave: ");
         System.out.println("    - Combustible: "+nave.getUnidadesCombustible());
         System.out.println("    - Eficiencia: "+nave.geteficienciaPropulsor());
@@ -40,8 +55,14 @@ public class procesamiento {
         System.out.println("    - Unidades de Platino: "+jugador.getPlatino());
     }
     
-    
     public int mostrarMateriales(Planeta planeta){
+        /*
+            Input: Recibe un objeto de tipo planeta
+            Funcionalidad: Segun el planeta muestra los diferentes recursos que va a tener dispoible y da al usuario a escoger una opcion
+            Output: Retorna un entero que representa el tipo de recurso a extraer.
+
+        */
+
         System.out.println("Estos son los recursos disponibles: ");
         System.out.println("    1. Cristales de hidrogeno");
 
@@ -67,6 +88,15 @@ public class procesamiento {
     }
     
     public void guardarMaterialInventario(int cantExtraccion, Jugador jugador, int recurso, Planeta planeta){
+        /*
+            Input: Recibe parametros de tipo int (x2), Jugador y planeta
+            Funcionalidad: Es la funcion encargada de, una vez extraidos los recuross, almacenar la misma cantidad en el inventario
+            del jugador segun corresponda. Lo primer oque hace es verificar en que tipo de planeta esta el jugador, para que con el entero que
+            representa el tipo de recurso, sepa de que recurso se tiene que guardar en que atributo del jugador. La cantidad representa la cantidad
+            extraida.
+            Output: No genera retorno
+
+        */
         switch (planeta.getClass().getSimpleName()) {
             case "Volcanico"-> {
                 switch (recurso){
@@ -116,12 +146,25 @@ public class procesamiento {
     }
 
     public void reiniciar(MapaGalactico mapa, Jugador jugador, Nave nave){
+        /*
+            Input: Recibe objetos de tipo MapaGalactico, Jugador y Nave
+            Funcionalidad: Llama a las funciones de reinicio de cada una para reiniciar los valores.
+            Se usa cuando el jugador pierde la energia de su traje 
+            Output: No genera retorno
+
+        */
         jugador.reinicio();
         mapa.reinicio();
         nave.reinicio();
     }
 
     public void limpiar(){
+        /*
+            Input: No recibe parametros
+            Funcionalidad: Dependiendo del sistema operativo genera uno u otro comando para limpiar lo visible de la consola
+            Output: No genera retorno
+
+        */
         try {
             if(System.getProperty("os.name").contains("Windows")){
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -134,6 +177,12 @@ public class procesamiento {
     }
 
     public void enterContinuar(){
+        /*
+            Input: No recibe parametros
+            Funcionalidad: Simplemente meustra el mensaje y espera un retorno por consola de cualquier tipo.
+            Output: No genera retorno
+
+        */
         System.out.println("Presione 'enter' para continuar...");
         try {
             System.in.read();

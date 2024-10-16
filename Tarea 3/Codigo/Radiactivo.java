@@ -7,6 +7,14 @@ public class Radiactivo extends Planeta{
     private long uranio;
 
     public Radiactivo(){
+         /*
+        Input: No recibe parametros
+        Funcionalidad: Este es el constructor de la clase Radiactivo, subclase de planeta. Se genera el radio según los parametros dados
+        en las instrucciones y a partir de ahí se generan el uranio, las flores de sodio  y los cristales de hidrogeno.
+        Con los setters de la superclase se pasa el valor de los atributos.
+
+        Output: No genera output
+        */
         Random aleatorio = new Random();
 
         int radio = aleatorio.nextInt(100000 - 10000 + 1) + 10000;
@@ -24,21 +32,44 @@ public class Radiactivo extends Planeta{
 
     //Setters y getters
     public long getUranio() {
+        /*
+         Input: No recibe input
+         Funcionalidad: Getter del Uranio
+         Retorno: retorna la cantidad de uranio
+         */
         return uranio;
     }
 
     public long getRadiacion() {
+        /*
+         Input: No recibe input
+         Funcionalidad: Getter de la radiacion
+         Retorno: retorna la cantidad de radiacion
+         */
         return radiacion;
     }
 
     //Metodos
     @Override
     public float calcularConsumoEnergia() {
+        /*
+            Input: No recibe parametros
+            Funcionalidad: Calcula y retorna el consumo de energia del planeta segun la formula dada
+            Output: retorna el valor del calculo del consumo de energia
+
+        */
         return  (float)0.3 * radiacion;
     }
 
     @Override
     public int extraerRecursos(int tipo){
+        /*
+         Input: Recibe un entero que representa el tipo de recurso a extraer
+         Funcionalidad: Segu el tipo de recurso elegido para extraer (1 = hidrogeno, 2 = sodio, 3 = uranio), muestra la cantidad disponible en el planeta, 
+         y se da a elegir al usuario cuantos quiere extraer.
+         se verifica que sea un valor entre 0 y el maximo disponible. Luego resta esa cantidad de recursos del planeta
+         Retorno: Retorna la cantidad de recursos extraida, que luego sera necesario para restar la energia al traje. 
+         */
         int floresDeSodio = super.getFloresDeSodio();
         int cristalesHidrogeno = super.getCristalesHidrogeno();
         Scanner scan = new Scanner(System.in);

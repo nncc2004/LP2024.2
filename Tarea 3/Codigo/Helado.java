@@ -11,7 +11,7 @@ public class Helado extends Planeta implements tieneAsentamientos {
         Input: No recibe parametros
         Este es el constructor de la clase Helado, subclase de planeta. Segenera el radio según los parametros dados
         en las instrucciones y a partir de ahí se generan las flores de sodio  y los cristales de hidrogeno.
-        Con los setters de la superclase se pasa el valor de los parametros.
+        Con los setters de la superclase se pasa el valor de los atributos.
 
         Output: No genera output
         */
