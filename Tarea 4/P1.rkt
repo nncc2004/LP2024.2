@@ -28,8 +28,8 @@
 
 
 
-"Pruebas pre hechas"
-(buscador '(1 2 3) 0)
+;; Casos de prueba
+(buscador '(1 2 3) 3)
 (buscador '(ABC "ABC" 3.0 1234) "ABC")
 (buscador '(ABC "ABC" 3.0 1234) 'ABC)
 (buscador '(389 (2 4 5.0) (40 here 2)) '(40 here 2))
